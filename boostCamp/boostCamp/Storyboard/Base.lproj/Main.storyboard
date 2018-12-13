@@ -170,12 +170,16 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUf-Ug-Mp6">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUf-Ug-Mp6">
                                             <rect key="frame" x="14" y="27" width="100" height="121"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="9yM-c9-9vJ"/>
                                                 <constraint firstAttribute="width" secondItem="RUf-Ug-Mp6" secondAttribute="height" multiplier="62:75" id="bPu-Kz-bNH"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="6PL-sF-tjg" appends="YES" id="VrH-IB-SWh"/>
+                                            </connections>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="신과함께" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcf-xs-ga5">
                                             <rect key="frame" x="137" y="27" width="59" height="20.5"/>
@@ -272,7 +276,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="FiV-Fx-XOb" customClass="RatingStarView" customModule="boostCamp" customModuleProvider="target">
-                                                    <rect key="frame" x="5" y="42.5" width="114" height="21.5"/>
+                                                    <rect key="frame" x="4.5" y="42.5" width="115" height="21.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="drc-Gi-XE0" customClass="StarImgView" customModule="boostCamp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="21.5" height="21.5"/>
@@ -281,25 +285,25 @@
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MQm-RK-6oa" customClass="StarImgView" customModule="boostCamp" customModuleProvider="target">
-                                                            <rect key="frame" x="23.5" y="0.0" width="21" height="21.5"/>
+                                                            <rect key="frame" x="23.5" y="0.0" width="21.5" height="21.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="MQm-RK-6oa" secondAttribute="height" multiplier="1:1" id="xjx-Wy-Eis"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qd3-IJ-M96" customClass="StarImgView" customModule="boostCamp" customModuleProvider="target">
-                                                            <rect key="frame" x="46.5" y="0.0" width="21" height="21.5"/>
+                                                            <rect key="frame" x="47" y="0.0" width="21" height="21.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Qd3-IJ-M96" secondAttribute="height" multiplier="1:1" id="ior-dR-ZHD"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GF3-8Z-gvU" customClass="StarImgView" customModule="boostCamp" customModuleProvider="target">
-                                                            <rect key="frame" x="69.5" y="0.0" width="21.5" height="21.5"/>
+                                                            <rect key="frame" x="70" y="0.0" width="21.5" height="21.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="GF3-8Z-gvU" secondAttribute="height" multiplier="1:1" id="MEG-sp-C0R"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uyT-zE-CRU" customClass="StarImgView" customModule="boostCamp" customModuleProvider="target">
-                                                            <rect key="frame" x="93" y="0.0" width="21" height="21.5"/>
+                                                            <rect key="frame" x="93.5" y="0.0" width="21.5" height="21.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="uyT-zE-CRU" secondAttribute="height" multiplier="1:1" id="QVy-Fp-RD4"/>
                                                             </constraints>
@@ -585,8 +589,60 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9N-ua-igv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6PL-sF-tjg">
+                    <connections>
+                        <action selector="imageTapAction:" destination="H8i-HO-IRb" id="YY2-1Z-ab4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1504.8" y="357.57121439280365"/>
+        </scene>
+        <!--ImageVC-->
+        <scene sceneID="9Bc-FS-SQk">
+            <objects>
+                <viewController storyboardIdentifier="ImageVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="5T8-3K-IR9" customClass="ImageVC" customModule="boostCamp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="47y-Rf-aje">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrc-7z-Ydh">
+                                <rect key="frame" x="20" y="141" width="335" height="405"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xrc-7z-Ydh" secondAttribute="height" multiplier="62:75" id="g3r-DK-jUj"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqB-3y-ooT">
+                                <rect key="frame" x="20" y="75" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="2jQ-P4-7RS"/>
+                                    <constraint firstAttribute="width" secondItem="nqB-3y-ooT" secondAttribute="height" multiplier="1:1" id="rdb-XE-Xw7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissAction:" destination="5T8-3K-IR9" eventType="touchUpInside" id="70K-3X-mvj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nqB-3y-ooT" firstAttribute="leading" secondItem="xrc-7z-Ydh" secondAttribute="leading" id="5lt-j9-GXM"/>
+                            <constraint firstItem="aSy-UJ-faC" firstAttribute="trailing" secondItem="xrc-7z-Ydh" secondAttribute="trailing" constant="20" id="B0c-ON-8II"/>
+                            <constraint firstItem="xrc-7z-Ydh" firstAttribute="top" secondItem="nqB-3y-ooT" secondAttribute="bottom" constant="10" id="MvD-1b-PtQ"/>
+                            <constraint firstItem="xrc-7z-Ydh" firstAttribute="centerY" secondItem="aSy-UJ-faC" secondAttribute="centerY" id="Yj6-zD-Dds"/>
+                            <constraint firstItem="xrc-7z-Ydh" firstAttribute="leading" secondItem="aSy-UJ-faC" secondAttribute="leading" constant="20" id="yPT-6H-efP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aSy-UJ-faC"/>
+                    </view>
+                    <connections>
+                        <outlet property="movieImgView" destination="xrc-7z-Ydh" id="UBG-x2-Bya"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAc-5b-v64" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2205.5999999999999" y="357.57121439280365"/>
         </scene>
         <!--예매율순-->
         <scene sceneID="jjy-LO-Isx">

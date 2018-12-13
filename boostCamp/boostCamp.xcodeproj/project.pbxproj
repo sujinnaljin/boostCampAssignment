@@ -29,6 +29,7 @@
 		3B1EABEB21C2908E00DA5C4D /* GetCommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEA21C2908E00DA5C4D /* GetCommentService.swift */; };
 		3B1EABED21C2909A00DA5C4D /* GetMovieDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEC21C2909A00DA5C4D /* GetMovieDetailService.swift */; };
 		3B1EABEF21C29ADF00DA5C4D /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEE21C29ADF00DA5C4D /* DataCenter.swift */; };
+		3BA87FA921C2EC660014E4F7 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA87FA821C2EC660014E4F7 /* ImageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		3B1EABEA21C2908E00DA5C4D /* GetCommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentService.swift; sourceTree = "<group>"; };
 		3B1EABEC21C2909A00DA5C4D /* GetMovieDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailService.swift; sourceTree = "<group>"; };
 		3B1EABEE21C29ADF00DA5C4D /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
+		3BA87FA821C2EC660014E4F7 /* ImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		3B1EABC221C0A1CE00DA5C4D /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				3BA87FA721C2EC580014E4F7 /* Image */,
 				3B1EABC821C0A1FF00DA5C4D /* FirstTap */,
 				3B1EABC721C0A1FE00DA5C4D /* SecondTap */,
 				3B1EABC621C0A1FD00DA5C4D /* Detail */,
@@ -195,6 +198,14 @@
 			path = VO;
 			sourceTree = "<group>";
 		};
+		3BA87FA721C2EC580014E4F7 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				3BA87FA821C2EC660014E4F7 /* ImageVC.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,6 +290,7 @@
 				3B1EABCE21C0A25200DA5C4D /* DetailTVCell.swift in Sources */,
 				3B1EABD521C0BC0E00DA5C4D /* AgeView.swift in Sources */,
 				3B1EABE521C2619200DA5C4D /* CommentVO.swift in Sources */,
+				3BA87FA921C2EC660014E4F7 /* ImageVC.swift in Sources */,
 				3B1EABE321C2618C00DA5C4D /* MovieDetailVO.swift in Sources */,
 				3B1EABDC21C2602C00DA5C4D /* UrlPath.swift in Sources */,
 				3B1EABC021C0A1A300DA5C4D /* DetailVC.swift in Sources */,

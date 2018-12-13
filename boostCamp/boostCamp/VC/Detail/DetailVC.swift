@@ -106,6 +106,14 @@ class DetailVC: UIViewController {
         actorLbl.text = data.actor
         ratingStarView.rating = data.userRating
     }
+    
+    @IBAction func imageTapAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let imageVC = storyboard.instantiateViewController(withIdentifier:ImageVC.reuseIdentifier) as? ImageVC {
+            imageVC.selectedImage = titleImgView.image
+            self.present(imageVC, animated: true, completion: nil)
+        }
+    }
 }
 
 extension DetailVC : UITableViewDataSource, UITableViewDelegate {
