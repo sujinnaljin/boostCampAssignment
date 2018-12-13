@@ -117,6 +117,13 @@ class DetailVC: UIViewController {
 }
 
 extension DetailVC : UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UITableViewHeaderFooterView()
+        returnedView.contentView.backgroundColor = .white
+        returnedView.textLabel?.text = "한줄평"
+        return returnedView
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return commentList.count
@@ -128,6 +135,7 @@ extension DetailVC : UITableViewDataSource, UITableViewDelegate {
         cell.configure(data: commentList[indexPath.row])
         return cell
     }
+    
 }
 
 //통신
