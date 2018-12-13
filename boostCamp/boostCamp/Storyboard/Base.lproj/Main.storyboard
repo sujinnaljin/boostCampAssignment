@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H8i-HO-IRb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zs9-Hj-I5Y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -101,6 +101,7 @@
                                                 <constraint firstItem="kqW-T7-3Zu" firstAttribute="top" secondItem="sUB-bW-TlE" secondAttribute="top" id="Iiz-n3-HMZ"/>
                                                 <constraint firstItem="zMS-oF-KQe" firstAttribute="leading" secondItem="sUB-bW-TlE" secondAttribute="leading" id="NhK-wK-Mpq"/>
                                                 <constraint firstItem="LAi-Ul-iKD" firstAttribute="leading" secondItem="sl3-39-O1G" secondAttribute="leading" constant="26" id="ToN-2T-ZSQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="eZb-PM-sHx" secondAttribute="bottom" constant="31" id="VF7-dj-QcX"/>
                                                 <constraint firstItem="zMS-oF-KQe" firstAttribute="top" secondItem="sUB-bW-TlE" secondAttribute="bottom" constant="10.5" id="aJe-M6-Xal"/>
                                                 <constraint firstItem="kqW-T7-3Zu" firstAttribute="centerY" secondItem="sUB-bW-TlE" secondAttribute="centerY" id="aMe-V3-PgO"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eZb-PM-sHx" secondAttribute="trailing" constant="5" id="eIR-wQ-Kbm"/>
@@ -733,6 +734,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Zs9-Hj-I5Y" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VYz-Za-Tye">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

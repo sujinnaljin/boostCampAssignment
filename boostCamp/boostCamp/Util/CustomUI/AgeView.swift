@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum MovieAge : Int {
+enum MovieAge : Int, Codable {
     case all = 0
     case twelve = 12
     case fifteen = 15
