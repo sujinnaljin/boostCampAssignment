@@ -16,14 +16,9 @@ enum Result<T> {
 
 enum NetworkResult<T> {
     case networkSuccess(T)
-    case UIDErr
-    case selectErr
     case serverErr
-    case accessDenied
-    case nullValue
-    case duplicated
     case networkFail
-    case wrongInput
+    case decodeFail
 }
 
 enum HttpResponseCode: Int{
@@ -56,9 +51,7 @@ extension GettableService {
                     let data = try decoder.decode(NetworkData.self, from: data)
                     let result : networkResult = (resCode, data)
                     completion(.success(result))
-                    
                 }catch {
-                    //TODO :- 메시지일때 두트캐한번 더?
                     completion(.error("값을 지정한 json 형태로 변환할 수 없음"))
                 }
             }

@@ -15,7 +15,7 @@ struct MovieDetailVO: Codable {
     let actor: String
     let image: String
     let id: String
-    let grade: Int
+    let grade: MovieAge
     let genre: String
     let userRating: Double
     let date: String

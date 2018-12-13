@@ -18,16 +18,20 @@ enum MovieAge : Int, Codable {
 class AgeView : UIView {
     var age : MovieAge = .all {
         didSet {
-            update()
+            DispatchQueue.main.async {
+                self.update()
+            }
         }
     }
     
     var ageLbl : UILabel?
+    
     func update(){
         self.ageLbl?.text = self.age.rawValue.description
         switch self.age {
         case .all:
-           self.backgroundColor = .green
+            self.ageLbl?.text = "전체"
+            self.backgroundColor = .green
         case .twelve:
             self.backgroundColor = .blue
         case .fifteen:

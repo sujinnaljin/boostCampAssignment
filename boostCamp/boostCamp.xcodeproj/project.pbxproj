@@ -28,6 +28,7 @@
 		3B1EABE921C26D7900DA5C4D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABE821C26D7900DA5C4D /* Extension.swift */; };
 		3B1EABEB21C2908E00DA5C4D /* GetCommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEA21C2908E00DA5C4D /* GetCommentService.swift */; };
 		3B1EABED21C2909A00DA5C4D /* GetMovieDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEC21C2909A00DA5C4D /* GetMovieDetailService.swift */; };
+		3B1EABEF21C29ADF00DA5C4D /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1EABEE21C29ADF00DA5C4D /* DataCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		3B1EABE821C26D7900DA5C4D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3B1EABEA21C2908E00DA5C4D /* GetCommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentService.swift; sourceTree = "<group>"; };
 		3B1EABEC21C2909A00DA5C4D /* GetMovieDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieDetailService.swift; sourceTree = "<group>"; };
+		3B1EABEE21C29ADF00DA5C4D /* DataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				3B1EABD721C25FA000DA5C4D /* Util */,
-				3B1EABA921C08E1300DA5C4D /* AppDelegate.swift */,
 				3B1EABC521C0A1E400DA5C4D /* Storyboard */,
 				3B1EABC221C0A1CE00DA5C4D /* VC */,
 				3B1EABB021C08E1300DA5C4D /* Assets.xcassets */,
+				3B1EABA921C08E1300DA5C4D /* AppDelegate.swift */,
 				3B1EABB521C08E1300DA5C4D /* Info.plist */,
 			);
 			path = boostCamp;
@@ -155,10 +157,10 @@
 			isa = PBXGroup;
 			children = (
 				3B1EABDB21C2602C00DA5C4D /* UrlPath.swift */,
-				3B1EABD921C25FB600DA5C4D /* Data */,
-				3B1EABCF21C0A85500DA5C4D /* CustomUI */,
 				3B1EABDD21C2613100DA5C4D /* GettableService.swift */,
 				3B1EABE821C26D7900DA5C4D /* Extension.swift */,
+				3B1EABD921C25FB600DA5C4D /* Data */,
+				3B1EABCF21C0A85500DA5C4D /* CustomUI */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -176,6 +178,7 @@
 		3B1EABD921C25FB600DA5C4D /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3B1EABEE21C29ADF00DA5C4D /* DataCenter.swift */,
 				3B1EABDF21C2617000DA5C4D /* VO */,
 				3B1EABD821C25FAB00DA5C4D /* Service */,
 			);
@@ -280,6 +283,7 @@
 				3B1EABDC21C2602C00DA5C4D /* UrlPath.swift in Sources */,
 				3B1EABC021C0A1A300DA5C4D /* DetailVC.swift in Sources */,
 				3B1EABEB21C2908E00DA5C4D /* GetCommentService.swift in Sources */,
+				3B1EABEF21C29ADF00DA5C4D /* DataCenter.swift in Sources */,
 				3B1EABBC21C0A19000DA5C4D /* FirstTapVC.swift in Sources */,
 				3B1EABBE21C0A19A00DA5C4D /* SecondTapVC.swift in Sources */,
 			);

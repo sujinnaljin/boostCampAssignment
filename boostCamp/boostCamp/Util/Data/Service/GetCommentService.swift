@@ -26,6 +26,7 @@ struct GetCommentService: GettableService {
                 break
             case .error(let errMsg) :
                 print(errMsg)
+                completion(.decodeFail)
                 break
             case .failure :
                 completion(.networkFail)

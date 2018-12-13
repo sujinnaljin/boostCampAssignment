@@ -18,9 +18,10 @@ struct CommentVO: Codable {
     }
 }
 
+
 struct Comment: Codable {
     let contents: String
-    let rating: Int
+    let rating: Double
     let timestamp: Double
     let movieID: String
     let writer, id: String

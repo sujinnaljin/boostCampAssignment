@@ -20,5 +20,16 @@ class SecondTapCVCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         ageView.ageLbl = ageLbl
+        ageView.makeRounded()
+    }
+    
+    func configure(data : Movie){
+        guard let encodedThumbUrl = data.thumb.getEncodedUrl() else {return}
+        titleImgView.setImageWithUrl(encodedThumbUrl)
+        ageView.age = data.grade
+        titleLbl.text = data.title
+        rankingLbl.text = "\(data.reservationGrade)위(\(data.userRating))"
+        bookingRateLbl.text = "\(data.reservationRate)%"
+        dateLbl.text = data.date
     }
 }

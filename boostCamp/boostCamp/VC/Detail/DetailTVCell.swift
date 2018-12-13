@@ -14,8 +14,15 @@ class DetailTVCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
      @IBOutlet weak var reviewLbl: UILabel!
     @IBOutlet weak var ratingStarView: RatingStarView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func configure(data : Comment){
+        nicknameLbl.text = data.writer
+        dateLbl.text = data.timestamp.timeStampToDate()
+        reviewLbl.text = data.contents
+        ratingStarView.rating = Double(data.rating)
     }
 }

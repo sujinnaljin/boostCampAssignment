@@ -44,17 +44,17 @@ class RatingStarView : UIStackView {
     }
     
     func update(_ rating : Double){
-        var rating_ = rating
+        var rating_ = round(rating)
         for i in (0..<5) {
             let starView = self.subviews[i] as! StarImgView
-            if rating_ >= 1 {
+            if rating_ >= 2 {
                 starView.fillMode = .full
-            } else if rating_ >= 0.5 {
+            } else if rating_ >= 1 {
                 starView.fillMode = .half
             } else {
                 starView.fillMode = .none
             }
-            rating_ -= 1
+            rating_ -= 2
         }
     }
 }

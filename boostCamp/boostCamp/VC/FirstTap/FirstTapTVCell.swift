@@ -32,7 +32,7 @@ class FirstTapTVCell: UITableViewCell {
         titleLbl.text = data.title
         ratingLbl.text = "평점 : "+data.userRating.description
         rankingLbl.text = "예매 순위 : "+data.reservationGrade.description
-        bookingRateLbl.text = "예매율 : "+data.reservationRate.description
+        bookingRateLbl.text = "예매율 : \(data.reservationRate)%"
         dateLbl.text = data.date
     }
 }
