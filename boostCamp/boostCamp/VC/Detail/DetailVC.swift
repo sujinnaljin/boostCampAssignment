@@ -152,8 +152,10 @@ extension DetailVC {
                    self.setHeaderView(data: movieDetail)
                 }
             case .decodeFail :
+                self.stopAnimating(isFetchedAll: true)
                 self.simpleAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
             case .networkFail :
+                self.stopAnimating(isFetchedAll: true)
                 self.simpleAlert(title: "네트워크 연결 실패", message: "네트워크 연결상태를 확인해주세요")
             default :
                 break
