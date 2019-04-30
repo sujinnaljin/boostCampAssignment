@@ -9,10 +9,9 @@
 import UIKit
 
 class DetailTVCell: UITableViewCell {
-    @IBOutlet weak var profileImgView: UIImageView!
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
-     @IBOutlet weak var reviewLbl: UILabel!
+    @IBOutlet weak var reviewLbl: UILabel!
     @IBOutlet weak var ratingStarView: RatingStarView!
     
     override func awakeFromNib() {

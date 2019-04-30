@@ -15,6 +15,7 @@ class FirstTapVC: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //노티 설정
         NotificationCenter.default.addObserver(self, selector: #selector(getMovieStatusInfo(_:)), name: MOVIE_STATUS_NOTI, object: nil)
         setupTableView()
         setFirstData()
@@ -22,14 +23,15 @@ class FirstTapVC: UIViewController{
     
     @IBAction func settingAction(_ sender: Any) {
         orderAction { (orderType) in
+            //action sheet에서 선택한 값 받아서 데이터센터의 selectedOrder에 할당해줌.
             DataCenter.shared().selectedOrder = orderType
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-            }
+            //selectedOrder가 바뀔때마다 통신하게 코드 작성했으므로 activityIndicator도 활성화
+            self.activityIndicator.startAnimating()
         }
     }
     
     func setFirstData(){
+        //처음 뷰 로드 되었을때 정렬기준은 예매율순
         DataCenter.shared().selectedOrder = .reservationRate
         self.activityIndicator.startAnimating()
     }
@@ -42,28 +44,33 @@ class FirstTapVC: UIViewController{
     }
     
     @objc func startReload(_ sender: UIRefreshControl){
+        //현재 설정되어있는 값 그대로 다시 넣어주면 됨
        DataCenter.shared().selectedOrder = DataCenter.shared().selectedOrder
     }
    
+    //노티 받아서 실행될 함수
     @objc func getMovieStatusInfo(_ notification : Notification) {
-        if let status = (notification.userInfo?["status"] as? NetworkResult<Any>){
+        if let status = (notification.userInfo?["status"] as? NetworkResult<Movies>){
             self.activityIndicator.stopAnimating()
             tableView.refreshControl?.endRefreshing()
             switch status {
-            case .networkSuccess(_):
+            case .Success(_):
+                //노티 받아서 온 상태가 성공이면 tableView 갱신.
+                //tableView datasource 는 DataCenter의 moives이고, 이미 DataCenter에서는 통신 성공 후 movies에 새로운 값이 담긴 상태일테니까 tableView.reloadData() 하면 됨.
                 self.tableView.reloadData()
                 self.navigationItem.title = notification.userInfo?["title"] as? String
-            case .decodeFail:
-                self.simpleAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
-            case .networkFail:
-                self.simpleAlert(title: "네트워크 연결 실패", message: "네트워크 연결상태를 확인해주세요")
-            default :
-                break
+            case .Failure(let errorType):
+                self.showErrorAlert(errorType: errorType)
             }
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
+//tableView datasource, delegate
 extension FirstTapVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

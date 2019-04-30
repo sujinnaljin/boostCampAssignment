@@ -7,12 +7,24 @@
 //
 
 import UIKit
+
 extension UIViewController {
     func simpleAlert(title: String, message: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인",style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+    
+    func showErrorAlert(errorType : Error){
+        switch errorType {
+        case .networkConnectFail:
+            self.simpleAlert(title: "오류", message: "네트워크 상태를 확인해주세요")
+        case .networkError(_, let msg):
+            self.simpleAlert(title: "오류", message: msg)
+        case .decodeError:
+            self.simpleAlert(title: "오류", message: "디코딩에 실패했습니다. 다시 시도해주세요")
+        }
     }
     
     func orderAction(orderHandler : @escaping (_ orderType : OrderType)->Void){
@@ -59,7 +71,6 @@ extension String {
 
 
 extension UIImageView {
-    //TODO :- 백그라운드?
     func setImageWithUrl(_ url : URL){
         URLSession.shared.dataTask(with: url){ (data, response, error) in
             guard let data = data, error == nil else { return }

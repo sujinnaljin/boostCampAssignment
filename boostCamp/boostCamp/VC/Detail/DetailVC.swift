@@ -29,12 +29,11 @@ class DetailVC: UIViewController {
     
     var selectedMovie = ""
     var selectedMovieTitle = ""
+    var networkProvider = NetworkManager.sharedInstance
     
     var commentList : [Comment] = []{
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
     }
     
@@ -42,24 +41,18 @@ class DetailVC: UIViewController {
     var isFetchedMovie = false
     
     func stopAnimating(isFetchedAll : Bool){
+        //Comment와 Movie가 모두 통신 성공, 혹은 둘 중 하나가 에러 결과를 받았을때 indicator가 중단될 것
         if isFetchedAll {
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-            }
+            self.activityIndicator.stopAnimating()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        self.getMovieDetail()
+        self.getMovieComment()
         
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let `self` = self else { return }
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-            }
-            self.getMovieDetail(url:  UrlPath.getMovieDetail.getURL("?id=\(self.selectedMovie)"))
-            self.getMovieComment(url: UrlPath.getMovieComment.getURL("?movie_id=\(self.selectedMovie)"))
-        }
         self.navigationItem.title = selectedMovieTitle
         setupTableView()
         ageView.makeRounded()
@@ -90,7 +83,8 @@ class DetailVC: UIViewController {
         tableView.dataSource = self
     }
     
-    func setHeaderView(data : MovieDetailVO){
+    //영화 정보에 관한 헤더 뷰 세팅
+    func setHeaderView(data : MovieDetail){
         guard let encodedThumbUrl = data.image.getEncodedUrl() else {return}
         titleImgView.setImageWithUrl(encodedThumbUrl)
         ageView.age = data.grade
@@ -107,6 +101,7 @@ class DetailVC: UIViewController {
         ratingStarView.rating = data.userRating
     }
     
+    //이미지 클릭했을때 크게 보이도록 다른 화면으로 넘어감
     @IBAction func imageTapAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let imageVC = storyboard.instantiateViewController(withIdentifier:ImageVC.reuseIdentifier) as? ImageVC {
@@ -114,15 +109,26 @@ class DetailVC: UIViewController {
             self.present(imageVC, animated: true, completion: nil)
         }
     }
+    
+    //댓글 작성화면으로 넘어감
+    @objc func writeCmt(sender: UIButton!) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let commentVC = storyboard.instantiateViewController(withIdentifier:CommentVC.reuseIdentifier) as? CommentVC {
+            commentVC.selectedMovie = self.selectedMovie
+            commentVC.selectedMovieTitle = self.selectedMovieTitle
+            self.present(commentVC, animated: true, completion: nil)
+        }
+    }
+    
 }
 
+//tableView datasource, delegate
 extension DetailVC : UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let returnedView = UITableViewHeaderFooterView()
-        returnedView.contentView.backgroundColor = .white
-        returnedView.textLabel?.text = "한줄평"
-        return returnedView
+        let filterView = DetailHeaderView.instanceFromNib()
+        filterView.writeBtn.addTarget(self, action: #selector(writeCmt), for: .touchUpInside)
+        return filterView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,46 +146,45 @@ extension DetailVC : UITableViewDataSource, UITableViewDelegate {
 
 //통신
 extension DetailVC {
-    func getMovieDetail(url : String){
-        GetMovieDetailService.shareInstance.getMovieDetail(url: url){ [weak self] (result) in
+    func getMovieDetail(){
+        //indicator가 돌고 있지 않다면 활성화 시킴
+        if !self.activityIndicator.isAnimating {
+            self.activityIndicator.startAnimating()
+        }
+        networkProvider.getMovieDetail(movieId: selectedMovie) { [weak self] (result) in
             guard let `self` = self else { return }
-            self.isFetchedMovie = true
-            self.stopAnimating(isFetchedAll: self.isFetchedMovie && self.isFetchedComment)
-            switch result {
-            case .networkSuccess(let movieDetail):
-                guard let movieDetail = movieDetail as? MovieDetailVO else {return}
-                DispatchQueue.main.async {
-                   self.setHeaderView(data: movieDetail)
+            DispatchQueue.main.async {
+                switch result {
+                case .Success(let movieDetail):
+                    self.isFetchedMovie = true
+                    //두개 다 통신 결과 왔을때 indicator 중단
+                    self.stopAnimating(isFetchedAll: self.isFetchedMovie && self.isFetchedComment)
+                    self.setHeaderView(data: movieDetail)
+                case .Failure(let errorType) :
+                    //에러 왔으면 indicator 강제 중단하고 alert 띄움
+                    self.stopAnimating(isFetchedAll: true)
+                    self.showErrorAlert(errorType: errorType)
                 }
-            case .decodeFail :
-                self.stopAnimating(isFetchedAll: true)
-                self.simpleAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
-            case .networkFail :
-                self.stopAnimating(isFetchedAll: true)
-                self.simpleAlert(title: "네트워크 연결 실패", message: "네트워크 연결상태를 확인해주세요")
-            default :
-                break
             }
         }
     }
     
-    func getMovieComment(url : String){
-        GetCommentService.shareInstance.getCommentList(url: url){ [weak self] (result) in
+    func getMovieComment(){
+        if !self.activityIndicator.isAnimating {
+            self.activityIndicator.startAnimating()
+        }
+        networkProvider.getComments(movieId: selectedMovie) { [weak self] (result) in
             guard let `self` = self else { return }
-            self.isFetchedComment = true
-            switch result {
-            case .networkSuccess(let commentList):
-                self.stopAnimating(isFetchedAll: self.isFetchedMovie && self.isFetchedComment)
-                guard let commentList = commentList as? CommentVO else {return}
-                self.commentList = commentList.comments
-            case .decodeFail :
-                self.stopAnimating(isFetchedAll: true)
-                self.simpleAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
-            case .networkFail :
-                self.stopAnimating(isFetchedAll: true)
-                self.simpleAlert(title: "네트워크 연결 실패", message: "네트워크 연결상태를 확인해주세요")
-            default :
-                break
+            DispatchQueue.main.async {
+                switch result {
+                case .Success(let commentList):
+                    self.isFetchedComment = true
+                    self.stopAnimating(isFetchedAll: self.isFetchedMovie && self.isFetchedComment)
+                    self.commentList = commentList.comments
+                case .Failure(let errorType) :
+                    self.stopAnimating(isFetchedAll: true)
+                    self.showErrorAlert(errorType: errorType)
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ class SecondTapVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //노티 설정
         NotificationCenter.default.addObserver(self, selector: #selector(getMovieStatusInfo(_:)), name: MOVIE_STATUS_NOTI, object: nil)
         setupCollectionView()
         setFirstData()
@@ -23,9 +24,7 @@ class SecondTapVC: UIViewController{
     @IBAction func settingAction(_ sender: Any) {
         orderAction { (orderType) in
             DataCenter.shared().selectedOrder = orderType
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-            }
+            self.activityIndicator.startAnimating()
         }
     }
     
@@ -45,20 +44,17 @@ class SecondTapVC: UIViewController{
         self.activityIndicator.startAnimating()
     }
     
+    //노티 받아서 실행될 함수
     @objc func getMovieStatusInfo(_ notification : Notification) {
-        if let status = (notification.userInfo?["status"] as? NetworkResult<Any>){
+        if let status = (notification.userInfo?["status"] as? NetworkResult<Movies>){
             self.activityIndicator.stopAnimating()
             collectionView.refreshControl?.endRefreshing()
             switch status {
-            case .networkSuccess(_):
+            case .Success(_):
                 self.collectionView.reloadData()
                 self.navigationItem.title = notification.userInfo?["title"] as? String
-            case .decodeFail:
-                self.simpleAlert(title: "오류가 발생했습니다", message: "다시 시도해주세요")
-            case .networkFail:
-                self.simpleAlert(title: "네트워크 연결 실패", message: "네트워크 연결상태를 확인해주세요")
-            default :
-                break
+            case .Failure(let errorType):
+                self.showErrorAlert(errorType: errorType)
             }
         }
     }
@@ -67,6 +63,8 @@ class SecondTapVC: UIViewController{
         NotificationCenter.default.removeObserver(self)
     }
 }
+
+//collectionView datasource, delegate
 extension SecondTapVC : UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,4 +95,5 @@ extension SecondTapVC: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 170.getPortionalLength(), height: 250.getPortionalLength())
     }
 }
+
 

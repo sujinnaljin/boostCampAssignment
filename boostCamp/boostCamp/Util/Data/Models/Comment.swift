@@ -1,14 +1,14 @@
 //
-//  CommentVO.swift
+//  Comment.swift
 //  boostCamp
 //
-//  Created by 강수진 on 2018. 12. 13..
-//  Copyright © 2018년 강수진. All rights reserved.
+//  Created by 강수진 on 30/04/2019.
+//  Copyright © 2019 강수진. All rights reserved.
 //
 
 import Foundation
 
-struct CommentVO: Codable {
+struct Comments: Codable {
     let comments: [Comment]
     let movieID: String
     
@@ -33,3 +33,15 @@ struct Comment: Codable {
     }
 }
 
+struct WriteComment: Codable {
+    let contents: String
+    let rating: Double
+    let movieID: String
+    let writer: String
+    
+    enum CodingKeys: String, CodingKey {
+        case contents, rating
+        case movieID = "movie_id"
+        case writer
+    }
+}
